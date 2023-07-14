@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-
-    static MetroSystem metroSystem = new MetroSystem();
+ 
     public static void main(String[] args) {
+
+        MetroSystem metroSystem = new MetroSystem();
           
         try {
             
@@ -16,7 +17,7 @@ public class Main {
             
             while (sc.hasNextLine()) {
                
-               processCommand(sc.nextLine());
+               processCommand(metroSystem, sc.nextLine());
             }
             sc.close(); 
         } catch (IOException e) {
@@ -27,7 +28,7 @@ public class Main {
     /*
      * takes a single line of input and processes that accordingly
      */
-    private static void processCommand(String command){
+    private static void processCommand(MetroSystem metroSystem, String command){
         
         command = command.toLowerCase();
         command = command.replaceAll("[_]", "");
