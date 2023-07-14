@@ -28,16 +28,25 @@ public class Station {
         return passengerTypeCount;
     }
 
+    /*
+     * increses passenger count of citize's type by 1
+     */
     public void updateCount(Citizen citizen){
 
         String type = citizen.getType();
         passengerTypeCount.put(type, passengerTypeCount.getOrDefault(type, 0) + 1);
     }   
 
+    /*
+     * updates total income by adding current income
+     */
     public void addIncome(Double income) {
         this.income += income;
     }
 
+    /*
+     * updates total discount by adding current discount
+     */
     public void addDiscount(int discount) {
         this.discount += discount;
     } 

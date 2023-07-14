@@ -24,6 +24,9 @@ public class Main {
         }  
     }
 
+    /*
+     * takes a single line of input and processes that accordingly
+     */
     private static void processCommand(String command){
         
         command = command.toLowerCase();

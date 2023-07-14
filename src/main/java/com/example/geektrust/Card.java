@@ -5,6 +5,10 @@ public class Card {
     private int balance;
     private Station lastStation;
 
+    public void setLastStation(Station station){
+        this.lastStation = station;
+    }
+
     public Card(String cardNumber, int balance) {
         this.cardNumber = cardNumber;
         this.balance = balance;
@@ -18,6 +22,11 @@ public class Card {
         return balance;
     }
 
+    /*
+     * deducts cost from card and adds to station
+     * if cost is more than balance returns the difference
+     * otherwise returns 0
+     */
     public int deductBalance(int cost, Station station){
         
         if (balance >= cost){
@@ -33,10 +42,9 @@ public class Card {
         return cost;
     }
 
-    public void setLastStation(Station station){
-        this.lastStation = station;
-    }
-
+    /*
+     * checks if the card is used to buy ticket for a return journey
+     */
     public boolean isReturnJourney(Station boardingStation){
         if(this.lastStation == null) return false;
         return boardingStation != lastStation;
