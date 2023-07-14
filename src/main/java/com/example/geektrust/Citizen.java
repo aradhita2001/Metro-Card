@@ -18,8 +18,3 @@ public abstract class Citizen {
         return this.type;
     }
 }
-
-
-
-
-//
