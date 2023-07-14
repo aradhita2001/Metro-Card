@@ -6,3 +6,6 @@ public class SeniorCitizen extends Citizen {
         super("SENIOR_CITIZEN", 100);
     }
 }
+
+
+
