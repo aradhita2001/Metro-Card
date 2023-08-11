@@ -11,21 +11,13 @@ public class MetroSystem {
     final int DISCOUNT_FACTOR = 2;
 
     private ArrayList<Card> cards;
-    private Station central;
-    private Station airport;
-    private Citizen adult;
-    private Citizen seniorcitizen;
-    private Citizen kid;
-    private Class thisClass;
+    private HashMap<String, Station> stations;
 
     public MetroSystem() {
         cards = new ArrayList<Card>();
-        central = new Station("CENTRAL");
-        airport = new Station("AIRPORT");
-        adult = new Adult();
-        seniorcitizen = new SeniorCitizen();
-        kid = new Kid();
-        thisClass = this.getClass();
+        stations = new HashMap<String, Station>();
+        stations.put("CENTRAL",  new Station("CENTRAL"));
+        stations.put("AIRPORT", new Station("AIRPORT"));
     }
 
     /*
@@ -36,17 +28,19 @@ public class MetroSystem {
         cards.add(new Card(cardNumber, Integer.parseInt(balance)));
     }
 
-    public void checkIn(String cardNumber, String citizenType, String boardingStation) {
+    /*
+     * checks fare according to category
+     * takes care of billing
+     * updates on station data
+     */
+    public void checkIn(String cardNumber, String citizen, String boardingStation) {
 
         Card currentCard = getCardFromNumber(cardNumber);
-        Station CurrentStation = getStationFromName(boardingStation);
-        Citizen citizen = getCitizenType(citizenType); 
+        Station CurrentStation = stations.get(boardingStation);
         
         completeTransaction(currentCard, CurrentStation, citizen);
         CurrentStation.updateCount(citizen);
     }
-
-    
 
     /*
      * returns card instance from card number
@@ -61,38 +55,11 @@ public class MetroSystem {
     }
 
     /*
-     * returns station instance from station name
-     */
-    private Station getStationFromName(String stationName){
-
-        try {
-            return (Station)thisClass.getDeclaredField(stationName).get(this);
-        } catch (Exception e) {
-            
-        }
-        return null;
-    }
-
-    /*
-     * returns citizen object from citizen type 
-     * TODO: Refactor along with Citizen class and subclasses
-     */
-    private Citizen getCitizenType (String citizenType){
-       
-        try {
-            return (Citizen)thisClass.getDeclaredField(citizenType).get(this);
-        } catch (Exception e) {
-            
-        }
-        return null;
-    }
-
-    /*
      * takes card, station and citizen instances and carries out the transaction
      */
-    private void completeTransaction(Card card, Station station, Citizen citizen){
+    private void completeTransaction(Card card, Station station, String citizen){
         
-        int fare = citizen.getFare(); //sets fare according to citizen category
+        int fare = Citizen.getFare(citizen); //sets fare according to citizen category
         
         /*
          *checks for return journey and adjusts fare accordingly
@@ -118,10 +85,10 @@ public class MetroSystem {
      * Prints summary of total buisness in the specified format
      */
     public void printSummary(){
-        System.out.printf("TOTAL_COLLECTION %s %.0f %d\n", central.getName(), central.getIncome(), central.getDiscount());
-        printStationDetails(central);
-        System.out.printf("TOTAL_COLLECTION %s %.0f %d\n", airport.getName(), airport.getIncome(), airport.getDiscount());
-        printStationDetails(airport);
+        System.out.printf("TOTAL_COLLECTION %s %.0f %d\n", stations.get("CENTRAL").getName(), stations.get("CENTRAL").getIncome(), stations.get("CENTRAL").getDiscount());
+        printStationDetails(stations.get("CENTRAL"));
+        System.out.printf("TOTAL_COLLECTION %s %.0f %d\n", stations.get("AIRPORT").getName(), stations.get("AIRPORT").getIncome(), stations.get("AIRPORT").getDiscount());
+        printStationDetails(stations.get("AIRPORT"));
     }
 
     /*

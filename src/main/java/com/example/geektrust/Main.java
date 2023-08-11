@@ -30,15 +30,15 @@ public class Main {
      */
     private static void processCommand(MetroSystem metroSystem, String command){
         
-        command = command.toLowerCase();
-        command = command.replaceAll("[_]", "");
+        //command = command.toLowerCase();
+        //command = command.replaceAll("[_]", "");
         
         String[] commandParts = command.split(" ");
 
-        if(commandParts[0].equals("balance")){
+        if(commandParts[0].equals("BALANCE")){
             metroSystem.balance(commandParts[1], commandParts[2]);
         }
-        else if(commandParts[0].equals("checkin")){
+        else if(commandParts[0].equals("CHECK_IN")){
             metroSystem.checkIn(commandParts[1], commandParts[2], commandParts[3]);
         }
         else{

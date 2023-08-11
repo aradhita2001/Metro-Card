@@ -31,10 +31,9 @@ public class Station {
     /*
      * increses passenger count of citize's type by 1
      */
-    public void updateCount(Citizen citizen){
+    public void updateCount(String citizen){
 
-        String type = citizen.getType();
-        passengerTypeCount.put(type, passengerTypeCount.getOrDefault(type, 0) + 1);
+        passengerTypeCount.put(citizen, passengerTypeCount.getOrDefault(citizen, 0) + 1);
     }   
 
     /*

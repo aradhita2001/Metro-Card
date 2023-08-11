@@ -1,20 +1,22 @@
 package com.example.geektrust;
 
-public abstract class Citizen {
+import java.util.HashMap;
+
+public class Citizen {
     
-    private String type;
-    private int fare;
+    private static HashMap<String, Integer> chart;
 
-    public Citizen(String name, int fare){
-        this.fare = fare;
-        this.type = name;
+    static {
+        
+        chart = new HashMap<String, Integer>();
+
+        chart.put("SENIOR_CITIZEN", 100);
+        chart.put("ADULT", 200);
+        chart.put("KID", 50);
+
     }
 
-    public int getFare(){
-        return this.fare;
-    }
-
-    public String getType(){
-        return this.type;
+    public static int getFare(String type){
+        return chart.get(type);
     }
 }

@@ -5,13 +5,16 @@ public class Card {
     private int balance;
     private Station lastStation;
 
-    public void setLastStation(Station station){
-        this.lastStation = station;
-    }
-
     public Card(String cardNumber, int balance) {
         this.cardNumber = cardNumber;
         this.balance = balance;
+    }
+
+    /*
+     * sets the lastStation variable to the last station where the card was used
+     */
+    public void setLastStation(Station station){
+        this.lastStation = station;
     }
 
     public String getCardNumber() {
